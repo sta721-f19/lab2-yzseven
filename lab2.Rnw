@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage{url,hyperref}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,array,comment,eucal}
+\input{macros}
+
+
+
+\begin{document}
+\title{Lab2: Introduction to GitHub}
+\author{Your Name}
+\date{\today}
+\maketitle
+
+\section*{Overview}
+
+In this lab we will work with github on a local and remote repository for version control of your work.
+
+\section*{Push}
+
+First, edit this file locally (laptop or smith) to make a table with
+\begin{itemize}
+  \item First Name
+  \item netid
+  \item github username (not email; should be one word)
+\end{itemize}
+
+Save the file.
+
+To push the file to github, go to the Git tab on the top of the screen.
+Select the file.
+Click Commit and enter a helpful comment of what you did
+Click Push to sync changes to github.
+
+\section{Pull}
+
+Go to your github repo.
+
+Edit the file to add your full name and what program you are in at Duke
+Save.
+
+Go back to Rstudio and the repo.
+Click on Pull to bring the latest changes to the local repo
+
+\section{Merges}
+
+Edit files in both places and save.
+Locally Issue Commit, Pull and then edit to resolve conflicts.
+
+\section{More ?}
+problem fixed!
+\end{document}

@@ -1,0 +1,174 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage{url,hyperref}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,array,comment,eucal}
+\input{macros}
+\usepackage{fullpage}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+\title{Lab2: Introduction to GitHub}
+\author{Your Name}
+\date{\today}
+\maketitle
+
+\section*{Introduction}
+
+In this lab we will work with github on a local and remote repository for version control of your work.
+
+We will use the problem set from HW1 as a starting point.
+
+\begin{enumerate}
+  \item  Exercise 1.11 Christensen (review notes on expectations and covariance;  recall that
+$\E[\A \Y] = \A \Y$ and $\Cov(\A\Y, \B\Y) = \A \Cov(\Y)\B^T$
+\gap
+
+\item Exercise 1.5.2 Christensen
+\gap
+
+\item  We showed that $\P_\X = \X(\X^T\X)^{-1}\X^T$ was an orthogonal
+  projection on the column space of $\X$ and that $\hat{\Y} = \P_\X \Y$.
+  While useful for theory, the projection matrix should never be used
+  in practice to find the MLE of $\mub$ due to computational
+  complexity (inverses and matrix multiplication) and instability.  To
+  find $\hat{\b}$ for $\X$ of full column rank  we solve
+  $\X \b = \P_\X \Y$ which
+  leads to the {\em normal equations}
+  $$(\X^T\X) \b = \X^T\Y$$
+  and
+  solving the system of equations for $\b$.
+  Instead consider the following for $\X$ ($n \times p, p < n$) of rank $p$
+  \begin{enumerate}
+  \item  Any $\X$ may be written via a singular value decomposition as
+    $\U \Lambdab \V^T$ where $\U$ is a $n \times p$ orthonormal matrix,
+    ($\U^T\U = \I_p$ and columns of $\U$ form an orthonormal basis (ONB) for
+    $C(\X)$), $\Lambdab$ is a $p \times p$ diagonal matrix and $\V$ is
+    a $p \times p$ orthogonal matrix ($\V^T\V = \V \V^T = \I_p$. Note
+    the difference between {\em orthonormal} and {\em orthogonal}.
+    Show that $P_X$ may be expressed as a function of $\U$ only and
+    provide an expression for $\hat{\Y}$.  Similarly, find an
+    expression for $\hat{\b}$ in terms of $\U$, $\Lambdab$ and $\V$.
+    Your result should only require the inverse of a diagonal matrix!
+    \gap
+
+    \item  $\X$ may be written in a (reduced or thinned) QR decomposition as a matrix
+  $\Q$ that is a $n \times p$ orthonormal matrix (which forms an ONB
+  for $C(\X)$) and $\mat{R}$ which is a $p
+  \times p$ upper triangular matrix (i.e all elements below the
+  diagonal are 0) where $\X = \Q \mat{R}$. The columns of $\Q$ are an ONB for
+  the $C(\X)$. Show that $\P_\X$
+  may be expressed as a function of $\Q$ alone.   Show that  the
+ the normal equations reduce to solving the triangular system $\mat{R} \b = \Z$ where $\Z = \Q^T \Y$.
+ Because $\mat{R}$ is upper triangular, show that $\hat{\b}$ may be
+ obtained be back-solving thus avoiding the matrix inverse of $\X^T\X$.
+\gap
+
+ \item Any symmetric matrix $\A$ may be written via a Cholesky
+  decomposition as $\A = \L \L^T$ where $\L$
+  is lower triangular.   If $\Z = \X^T\Y$  show that we can solve two
+  triangular systems $\L \L^T \b = \Z$ by solving for $\w$ using  $\L \w = \Z$ using a
+  forward substitution and then for $\hat{\b}$ using
+  $\L^T \b = \w$ avoiding any matrix inversion.  Write this out in psuedo-code.
+\gap
+
+ \item Prove that the two projection matrices obtained by the SVD and  the QR method are the same.  (review Theorems in Christensen Appencies about uniqueness of projections and cite appropriate results to show that they are the same.)
+\gap
+
+\item Use \R to find $\Q$ and $\U$ for the matrix in Example 1.0.2 in Christensen using the QR and SVD methods respectively. Does $\Q$ equal $\U$?   See help pages via {\tt help(qr)} and  {\tt help(svd)} for function documentation.
+     (Use Sweave/knitr to  write up the solution!)
+
+
+
+\gap
+\item Verify that the numerical solutions for the projections using $\Q$ and $\U$ are equal to the expression in problem 1.5.8 (b).
+
+    Note: The Cholesky method is the fastest in terms of $O(n p^2 + p^3 /3)$  floating point operations (flops), but is numerically unstable if the matrix is poorly conditioned.  \R   uses the QR method ($O(2 n p^2 - 2p^3 /3)$ flops) in the function  {\tt lm.fit()}(which is the workhorse underneath the {\tt lm()} function.   The SVD method is the most expensive $O(2 n p^2 + 11 p^3)$ but can handle the rank deficient case. There are generalized Cholesky and QR methods for the rank deficient cases that involve pivoting the columns of X which avoids some of the instability used in the {\tt BAS} package {\tt bas.lm} for Bayesian regression and {\tt lm}
+
+\end{enumerate}
+\gap
+
+\item Suppose $\Sigmab$ is a real $p \times p$ positive semi-definite
+  matrix.  Then the Cholesky decomposition of
+  $\Sigmab = \L \L^T$ where $\L$ is a lower triangular matrix with
+  real, non-negative elements on the diagonal.
+  Suppose you can generate standard normal random variates, $\Z = (z_1,
+  \ldots, z_p)^T$ with $z_i \iid N(0,1)$ .
+
+\begin{enumerate}
+  \item What is the distribution of $\Y = \mub + \L \Z$ for $\mub \in \bbR^p$?
+\gap
+
+  \item Explain why it does not matter for generating $\Y$ that the Cholesky decomposition is not unique when $\Sigmab$ is not positive definite.  Does it matter how we choose a {\em matrix square root} $\A$ of $\Sigmab = \A \A^T$?  Explain.
+\gap
+
+\item In \R  use the {\tt chol} function to find the Cholesky factorization of $\V$ in exercise 1.5.2.
+\gap
+
+\item Using the Cholesky factorization, generate $5,000$ samples for the distribution of $\Y$. Given the factorization, matrix multiplication {\tt \%*\%}, and {\tt sweep}, can you do this without a loop in one line of code?!?
+\gap
+
+\item In \R create a histogram for the marginal distribution of $Y_1$ and overlay the actual density that you found in 1.5.2 (a).
+\gap
+
+\item Using the samples of $\Y$, use matrix multiplication and {\tt sweep} to generate samples of $\Z$.  Compare the empirical estimates of means, variances, and covariances to the values you obtained in part (g) of 1.5.2.
+
+\end{enumerate}
+\end{enumerate}
+
+For the parts that involve \R write up using \LaTeX and knitr with a Rnw file to generate a PDF.  Upload your Rnw file and pdf to Sakai. The other parts may be written using  \LaTeX/knitr or by hand and scanned in.  Suggestion see macro definitions in this repo for help.
+
+
+
+
+
+
+\end{document}
